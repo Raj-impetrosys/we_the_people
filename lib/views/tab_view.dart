@@ -1,6 +1,10 @@
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
+import 'package:wethepeople/globals/app_constants.dart';
+import 'package:wethepeople/globals/functions/on_back_button_pressed.dart';
+import 'package:wethepeople/services/firebase/firebase.dart';
 import 'package:wethepeople/views/homepage.dart';
+import 'package:wethepeople/views/notification.dart';
 import 'package:wethepeople/views/query.dart';
 import 'contact.dart';
 
@@ -12,40 +16,51 @@ class BottomTabBar extends StatefulWidget {
 }
 
 class _BottomTabBarState extends State<BottomTabBar> {
-  int index = 1;
   List<Widget> screens = [
-    const Query(),
+    const NotificationPage(),
     const HomePage(),
     const Contact(),
   ];
+
+  @override
+  void initState() {
+    firebase(context);
+    super.initState();
+  }
+
   @override
   Widget build(BuildContext context) {
     Color iconColor = Colors.black;
-    return Scaffold(
-      body: Center(
-          child: TextButton(
-        child: screens[index],
-        onPressed: () => Navigator.of(context).pushNamed('/bar'),
-      )),
-      bottomNavigationBar: ConvexAppBar(
-        backgroundColor: Colors.cyanAccent,
-        color: iconColor,
-        style: TabStyle.react,
-        items: const [
-          TabItem(
-            icon: Icons.message,
-          ),
-          TabItem(icon: Icons.home),
-          TabItem(
-            icon: Icons.phone,
-          ),
-        ],
-        initialActiveIndex: 1,
-        onTap: (int i) {
-          setState(() {
-            index = i;
-          });
-        },
+    return WillPopScope(
+      onWillPop: () {
+        return onBackButtonPressed(context);
+      },
+      child: Scaffold(
+        body: Center(
+            child: TextButton(
+          child: screens[Constants.index],
+          onPressed: () => Navigator.of(context).pushNamed('/bar'),
+        )),
+        bottomNavigationBar: ConvexAppBar(
+          backgroundColor: Colors.brown,
+          color: iconColor,
+          style: TabStyle.react,
+          items: const [
+            TabItem(
+              icon: Icons.notifications_active,
+            ),
+            TabItem(icon: Icons.home),
+            TabItem(
+              icon: Icons.phone,
+            ),
+          ],
+          initialActiveIndex: 1,
+          onTap: (int i) {
+            setState(() {
+              Constants.index = i;
+            });
+          },
+        ),
       ),
     );
   }

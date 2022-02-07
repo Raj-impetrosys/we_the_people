@@ -1,12 +1,9 @@
 import 'dart:async';
-
-import 'package:flutter/material.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-// import 'package:music_visualizer/music_visualizer.dart';
+import 'package:music_visualizer/music_visualizer.dart';
 import 'package:wethepeople/controllers/audio_player_controller.dart';
-import 'package:wethepeople/controllers/music_visualizer.dart';
+// import 'package:wethepeople/controllers/music_visualizer.dart';
 import 'package:wethepeople/globals/app_constants.dart';
-import 'package:wethepeople/views/contact.dart';
 
 class HomePage extends StatefulWidget {
   const HomePage({Key? key}) : super(key: key);
@@ -24,7 +21,7 @@ class _HomePageState extends State<HomePage>
   AnimationController? animationController;
   AudioPlayerController? audioPlayerController = AudioPlayerController();
 
-  double volume = 1.0;
+  double volume = 60.0;
 
   animate() {
     animationController = AnimationController(
@@ -33,6 +30,10 @@ class _HomePageState extends State<HomePage>
       ..addListener(() {
         setState(() {});
       });
+    Constants.isPlaying
+        ? animationController!.forward()
+        : animationController!.reverse();
+    // streamController.add(!Constants.isPlaying);
   }
 
   @override
@@ -40,6 +41,12 @@ class _HomePageState extends State<HomePage>
     audioPlayerController!.init();
     animate();
     super.initState();
+  }
+
+  @override
+  void didChangeDependencies() {
+    streamController.add(Constants.isPlaying);
+    super.didChangeDependencies();
   }
 
   @override
@@ -54,26 +61,58 @@ class _HomePageState extends State<HomePage>
 
     final List<int> duration = [900, 700, 600, 800, 500];
     return Scaffold(
-      bottomNavigationBar: ElevatedButton(
-          style: ButtonStyle(
-              padding: MaterialStateProperty.all(const EdgeInsets.all(25))),
-          onPressed: () {
-            showModalBottomSheet(
-                isScrollControlled: true,
-                constraints: BoxConstraints(
-                  maxHeight: height * 0.8,
-                ),
-                context: context,
-                builder: (context) => const Contact());
-          },
-          child: const Text(
-            "Contact info",
-            style: TextStyle(fontSize: 20),
-          )),
+      // appBar: AppBar(
+      //   actions: [
+      //     IconButton(onPressed: () {
+
+      //     }, icon: const Icon(Icons.notification_add))
+      //   ],
+      // ),
+      // bottomNavigationBar: Row(
+      //   mainAxisSize: MainAxisSize.max,
+      //   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+      //   children: [
+      //     ElevatedButton(
+      //         style: ButtonStyle(
+      //             padding: MaterialStateProperty.all(const EdgeInsets.all(25))),
+      //         onPressed: () {
+      //           showModalBottomSheet(
+      //               isScrollControlled: true,
+      //               constraints: BoxConstraints(
+      //                 maxHeight: height * 0.8,
+      //               ),
+      //               context: context,
+      //               builder: (context) => const Contact());
+      //         },
+      //         child: const Text(
+      //           "Notification",
+      //           style: TextStyle(fontSize: 20),
+      //         )),
+      //     ElevatedButton(
+      //         style: ButtonStyle(
+      //             padding: MaterialStateProperty.all(const EdgeInsets.all(25))),
+      //         onPressed: () {
+      //           showModalBottomSheet(
+      //               isScrollControlled: true,
+      //               constraints: BoxConstraints(
+      //                 maxHeight: height * 0.8,
+      //               ),
+      //               context: context,
+      //               builder: (context) => const Contact());
+      //         },
+      //         child: const Text(
+      //           "Contact info",
+      //           style: TextStyle(fontSize: 20),
+      //         )),
+      //   ],
+      // ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
-          Image.asset("assets/images/logo.png"),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 20),
+            child: Image.asset("assets/images/logo_1024_trans.png"),
+          ),
           SizedBox(
             height: 60,
             child: MusicVisualizer(
@@ -207,7 +246,7 @@ class _HomePageState extends State<HomePage>
                           setState(() {
                             volume = value;
                           });
-                          audioPlayerController!.setVolume(volume: value);
+                          audioPlayerController!.setVolume(volume: value / 100);
                         },
                         min: 0,
                         max: 100,

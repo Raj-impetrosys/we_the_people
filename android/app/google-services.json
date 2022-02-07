@@ -1,0 +1,46 @@
+{
+  "project_info": {
+    "project_number": "227596665443",
+    "project_id": "we-the-people-f23cc",
+    "storage_bucket": "we-the-people-f23cc.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:227596665443:android:cfbf4fa7f0dd5a5bdeae56",
+        "android_client_info": {
+          "package_name": "com.wethepeople.broadlink"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "227596665443-8bcgnmadvgnq4mhu1dgn3u4i4o3nfs78.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCJNZJItmCik3qErJwrx3aB22AL_OIO-ic"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "227596665443-8bcgnmadvgnq4mhu1dgn3u4i4o3nfs78.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "227596665443-1mov5lscoo9koairouvkkmqi87cc3t7d.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.wethepeople.broadlink"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
