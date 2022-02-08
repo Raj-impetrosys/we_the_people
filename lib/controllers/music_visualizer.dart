@@ -1,7 +1,6 @@
 library music_visualizer;
 
 import "package:flutter/material.dart";
-import 'package:flutter/animation.dart';
 import 'package:wethepeople/views/homepage.dart';
 
 class MusicVisualizer extends StatelessWidget {

@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wethepeople/globals/app_constants.dart';
-import 'package:wethepeople/globals/functions/on_back_button_pressed.dart';
 
 class Contact extends StatefulWidget {
   const Contact({Key? key}) : super(key: key);

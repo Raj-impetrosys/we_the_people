@@ -1,7 +1,7 @@
 // import 'package:just_audio/just_audio.dart';
 import 'package:audioplayers/audioplayers.dart';
 import 'package:flutter/material.dart';
-import 'package:media_notificationx/media_notificationx.dart';
+// import 'package:media_notificationx/media_notificationx.dart';
 import 'package:wethepeople/globals/app_constants.dart';
 import 'package:wethepeople/services/api/audio_video_url_api.dart';
 
@@ -44,7 +44,7 @@ class AudioPlayerController {
       // result = await audioPlayer.play(iveAudioUrl!);
     });
     setNotification();
-    setAndroidNotification();
+    // setAndroidNotification();
 
     player.onPlayerError.listen((msg) {
       debugPrint('audioPlayer error : $msg');
@@ -87,28 +87,6 @@ class AudioPlayerController {
 
     player.notificationService.onPlayerCommand.listen((event) {
       print(event);
-    });
-  }
-
-  setAndroidNotification() {
-    MediaNotificationx.showNotificationManager(
-        title: Constants.projectName, imageUrl: Constants.logoUrl);
-    MediaNotificationx.setListener('play', () {
-      play();
-      // if (mounted) {
-      //   setState(() => Constants.isPlaying = true);
-      // } else {
-      Constants.isPlaying = true;
-      // }
-    });
-
-    MediaNotificationx.setListener('pause', () {
-      pause();
-      // if (mounted) {
-      //   setState(() => Constants.isPlaying = false);
-      // } else {
-      Constants.isPlaying = false;
-      // }
     });
   }
 }

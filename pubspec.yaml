@@ -20,7 +20,7 @@ dependencies:
   google_fonts: ^2.2.0
   http: ^0.13.4
   just_audio: ^0.9.18
-  media_notification: ^0.0.1
+  # media_notification: ^0.0.1
   music_visualizer: ^1.0.2
   url_launcher: ^6.0.18
 

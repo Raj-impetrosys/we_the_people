@@ -5,7 +5,6 @@ import 'package:wethepeople/globals/functions/on_back_button_pressed.dart';
 import 'package:wethepeople/services/firebase/firebase.dart';
 import 'package:wethepeople/views/homepage.dart';
 import 'package:wethepeople/views/notification.dart';
-import 'package:wethepeople/views/query.dart';
 import 'contact.dart';
 
 class BottomTabBar extends StatefulWidget {

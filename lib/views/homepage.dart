@@ -36,10 +36,33 @@ class _HomePageState extends State<HomePage>
     // streamController.add(!Constants.isPlaying);
   }
 
+  // setAndroidNotification() {
+  //   MediaNotification.showNotificationManager(
+  //       title: Constants.projectName, imageUrl: Constants.logoUrl);
+  //   MediaNotification.setListener('play', () {
+  //     audioPlayerController!.play();
+  //     if (mounted) {
+  //       setState(() => Constants.isPlaying = true);
+  //     } else {
+  //       Constants.isPlaying = true;
+  //     }
+  //   });
+
+  //   MediaNotification.setListener('pause', () {
+  //     audioPlayerController!.pause();
+  //     if (mounted) {
+  //       setState(() => Constants.isPlaying = false);
+  //     } else {
+  //       Constants.isPlaying = false;
+  //     }
+  //   });
+  // }
+
   @override
   void initState() {
     audioPlayerController!.init();
     animate();
+    // setAndroidNotification();
     super.initState();
   }
 
