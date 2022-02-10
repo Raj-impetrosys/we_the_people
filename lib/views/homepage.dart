@@ -1,12 +1,15 @@
 import 'dart:async';
+import 'package:audioplayers/audioplayers.dart';
+import 'package:flutter_media_notification/flutter_media_notification.dart';
 import 'package:flutter_neumorphic/flutter_neumorphic.dart';
-import 'package:music_visualizer/music_visualizer.dart';
+// import 'package:media_notification/media_notification.dart';
+// import 'package:music_visualizer/music_visualizer.dart';
 import 'package:wethepeople/controllers/audio_player_controller.dart';
-// import 'package:wethepeople/controllers/music_visualizer.dart';
+import 'package:wethepeople/controllers/music_visualizer.dart';
 import 'package:wethepeople/globals/app_constants.dart';
 
 class HomePage extends StatefulWidget {
-  const HomePage({Key? key}) : super(key: key);
+  const HomePage({Key key}) : super(key: key);
 
   @override
   State<HomePage> createState() => _HomePageState();
@@ -17,58 +20,101 @@ StreamController<bool> streamController = StreamController<bool>.broadcast();
 class _HomePageState extends State<HomePage>
     with SingleTickerProviderStateMixin {
   Stream stream = streamController.stream;
-  Animation? animation;
-  AnimationController? animationController;
-  AudioPlayerController? audioPlayerController = AudioPlayerController();
+  Animation animation;
+  AnimationController animationController;
+  AudioPlayerController audioPlayerController = AudioPlayerController();
 
   double volume = 60.0;
 
   animate() {
     animationController = AnimationController(
         vsync: this, duration: const Duration(milliseconds: 500));
-    animation = Tween(begin: 0, end: 1).animate(animationController!)
+    animation = Tween(begin: 0, end: 1).animate(animationController)
       ..addListener(() {
         setState(() {});
       });
-    Constants.isPlaying
-        ? animationController!.forward()
-        : animationController!.reverse();
+    controlPlayPause();
+    // Constants.isPlaying
+    //     ? animationController.forward()
+    //     : animationController.reverse();
     // streamController.add(!Constants.isPlaying);
   }
 
-  // setAndroidNotification() {
-  //   MediaNotification.showNotificationManager(
-  //       title: Constants.projectName, imageUrl: Constants.logoUrl);
-  //   MediaNotification.setListener('play', () {
-  //     audioPlayerController!.play();
-  //     if (mounted) {
-  //       setState(() => Constants.isPlaying = true);
-  //     } else {
-  //       Constants.isPlaying = true;
-  //     }
-  //   });
+  controlPlayPause() {
+    Constants.isPlaying
+        ? animationController.forward()
+        : animationController.reverse();
+    if (mounted) streamController.add(Constants.isPlaying);
+  }
 
-  //   MediaNotification.setListener('pause', () {
-  //     audioPlayerController!.pause();
-  //     if (mounted) {
-  //       setState(() => Constants.isPlaying = false);
-  //     } else {
-  //       Constants.isPlaying = false;
+  setAndroidNotification() {
+    MediaNotification.showNotification(
+        title: Constants.projectName, author: "", isPlaying: Constants.isPlaying
+        //  imageUrl: Constants.logoUrl,
+        );
+    MediaNotification.setListener('play', () {
+      audioPlayerController.play();
+      if (mounted) {
+        setState(() => Constants.isPlaying = true);
+        controlPlayPause();
+      } else {
+        Constants.isPlaying = true;
+      }
+    });
+
+    MediaNotification.setListener('pause', () {
+      audioPlayerController.stop();
+      if (mounted) {
+        setState(() => Constants.isPlaying = false);
+        controlPlayPause();
+      } else {
+        Constants.isPlaying = false;
+      }
+    });
+  }
+
+  // audioPlayerHandler() {
+  //   audioPlayerController.player.onNotificationPlayerStateChanged
+  //       .listen((event) {
+  //     switch (event) {
+  //       case PlayerState.STOPPED:
+  //         setState(() {
+  //           Constants.isPlaying = false;
+  //         });
+  //         break;
+  //       case PlayerState.PLAYING:
+  //         setState(() {
+  //           Constants.isPlaying = true;
+  //         });
+  //         break;
+  //       case PlayerState.PAUSED:
+  //         setState(() {
+  //           Constants.isPlaying = false;
+  //         });
+  //         break;
+  //       case PlayerState.COMPLETED:
+  //         setState(() {
+  //           Constants.isPlaying = false;
+  //         });
+  //         break;
   //     }
   //   });
   // }
 
   @override
   void initState() {
-    audioPlayerController!.init();
+    audioPlayerController.init();
     animate();
-    // setAndroidNotification();
+    setAndroidNotification();
+    // audioPlayerHandler();
     super.initState();
   }
 
   @override
   void didChangeDependencies() {
-    streamController.add(Constants.isPlaying);
+    Future.delayed(const Duration(seconds: 1)).whenComplete(() {
+      streamController.add(Constants.isPlaying);
+    });
     super.didChangeDependencies();
   }
 
@@ -76,10 +122,10 @@ class _HomePageState extends State<HomePage>
   Widget build(BuildContext context) {
     double height = MediaQuery.of(context).size.height;
     final List<Color> colors = [
-      Colors.red[900]!,
-      Colors.green[900]!,
-      Colors.blue[900]!,
-      Colors.brown[900]!
+      Colors.red[900],
+      Colors.green[900],
+      Colors.blue[900],
+      Colors.brown[900]
     ];
 
     final List<int> duration = [900, 700, 600, 800, 500];
@@ -198,11 +244,11 @@ class _HomePageState extends State<HomePage>
           GestureDetector(
             onTap: () {
               Constants.isPlaying
-                  ? animationController!.reverse()
-                  : animationController!.forward();
+                  ? animationController.reverse()
+                  : animationController.forward();
               Constants.isPlaying
-                  ? audioPlayerController!.stop()
-                  : audioPlayerController!.play();
+                  ? audioPlayerController.stop()
+                  : audioPlayerController.play();
 
               // if (Constants.isPlaying) {
               //   animationController!.reverse();
@@ -211,15 +257,15 @@ class _HomePageState extends State<HomePage>
               //   audioPlayerController!.stop();
               //   audioPlayerController!.play();
               // }
-              streamController.add(Constants.isPlaying);
               Constants.isPlaying = !Constants.isPlaying;
+              streamController.add(Constants.isPlaying);
             },
             child: Neumorphic(
                 padding: const EdgeInsets.all(10),
                 style: neumorphicStyle,
                 child: AnimatedIcon(
                   icon: AnimatedIcons.play_pause,
-                  progress: animationController!,
+                  progress: animationController,
                   color: iconColors,
                   size: 30,
                 )),
@@ -253,7 +299,7 @@ class _HomePageState extends State<HomePage>
                       setState(() {
                         (volume > 9) ? volume = volume - 10 : volume = 0;
                       });
-                      audioPlayerController!.setVolume(volume: volume);
+                      audioPlayerController.setVolume(volume: volume);
                     },
                     child: Icon(
                       (volume == 0) ? Icons.volume_off : Icons.volume_down,
@@ -269,7 +315,7 @@ class _HomePageState extends State<HomePage>
                           setState(() {
                             volume = value;
                           });
-                          audioPlayerController!.setVolume(volume: value / 100);
+                          audioPlayerController.setVolume(volume: value / 100);
                         },
                         min: 0,
                         max: 100,
@@ -285,7 +331,7 @@ class _HomePageState extends State<HomePage>
                       setState(() {
                         (volume < 91) ? volume = volume + 10 : volume = 100;
                       });
-                      audioPlayerController!.setVolume(volume: volume);
+                      audioPlayerController.setVolume(volume: volume);
                     },
                     child: const Icon(
                       Icons.volume_up,

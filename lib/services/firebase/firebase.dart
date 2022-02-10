@@ -10,8 +10,8 @@ Future<void> firebaseMessagingBackgroundHandler(RemoteMessage message) async {
   debugPrint("Handling a background message: ${message.messageId}");
   debugPrint("Handling a background message: ${message.data}");
   debugPrint("Handling a background message: ${message.category}");
-  debugPrint("Handling a background message: ${message.notification!.title}");
-  debugPrint("Handling a background message: ${message.notification!.body}");
+  debugPrint("Handling a background message: ${message.notification.title}");
+  debugPrint("Handling a background message: ${message.notification.body}");
 }
 
 firebase(context) async {
@@ -35,20 +35,20 @@ firebase(context) async {
 
     if (message.notification != null) {
       debugPrint(
-          'Message also contained a notification: ${message.notification!.title}');
-      debugPrint(message.notification!.title);
-      debugPrint(message.notification!.body);
+          'Message also contained a notification: ${message.notification.title}');
+      debugPrint(message.notification.title);
+      debugPrint(message.notification.body);
     }
   });
 
   FirebaseMessaging.onMessageOpenedApp.listen((RemoteMessage message) {
-    debugPrint('onMessageOpenedApp: ' + message.notification!.title.toString());
+    debugPrint('onMessageOpenedApp: ' + message.notification.title.toString());
     Constants.index = 0;
     Navigator.of(context)
         .push(MaterialPageRoute(builder: (context) => const BottomTabBar()));
   });
 
-  FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
+  // FirebaseMessaging.onBackgroundMessage(firebaseMessagingBackgroundHandler);
 }
 
 // class Notification1 extends StatelessWidget {

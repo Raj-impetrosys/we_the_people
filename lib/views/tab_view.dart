@@ -1,3 +1,4 @@
+import 'dart:io';
 import 'package:convex_bottom_bar/convex_bottom_bar.dart';
 import 'package:flutter/material.dart';
 import 'package:wethepeople/globals/app_constants.dart';
@@ -8,13 +9,14 @@ import 'package:wethepeople/views/notification.dart';
 import 'contact.dart';
 
 class BottomTabBar extends StatefulWidget {
-  const BottomTabBar({Key? key}) : super(key: key);
+  const BottomTabBar({Key key}) : super(key: key);
 
   @override
   State<BottomTabBar> createState() => _BottomTabBarState();
 }
 
-class _BottomTabBarState extends State<BottomTabBar> {
+class _BottomTabBarState extends State<BottomTabBar>
+    with WidgetsBindingObserver {
   List<Widget> screens = [
     const NotificationPage(),
     const HomePage(),
@@ -22,7 +24,24 @@ class _BottomTabBarState extends State<BottomTabBar> {
   ];
 
   @override
+  void didChangeAppLifecycleState(AppLifecycleState state) {
+    switch (state) {
+      case AppLifecycleState.resumed:
+        break;
+      case AppLifecycleState.inactive:
+        break;
+      case AppLifecycleState.paused:
+        break;
+      case AppLifecycleState.detached:
+        exit(0);
+        break;
+    }
+    super.didChangeAppLifecycleState(state);
+  }
+
+  @override
   void initState() {
+    WidgetsBinding.instance.addObserver(this);
     firebase(context);
     super.initState();
   }

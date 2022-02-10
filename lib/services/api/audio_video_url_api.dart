@@ -19,8 +19,8 @@ Future<AudioVideoListResponse> createAudioVideoListState() async {
 }
 
 class AudioVideoListResponse {
-  String? message;
-  Map? data = {};
+  String message;
+  Map data = {};
 
   AudioVideoListResponse([this.message, this.data]);
 

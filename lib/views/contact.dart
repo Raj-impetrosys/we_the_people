@@ -3,7 +3,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:wethepeople/globals/app_constants.dart';
 
 class Contact extends StatefulWidget {
-  const Contact({Key? key}) : super(key: key);
+  const Contact({Key key}) : super(key: key);
 
   @override
   _ContactState createState() => _ContactState();

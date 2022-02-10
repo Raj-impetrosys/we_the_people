@@ -4,14 +4,14 @@ import 'package:wethepeople/globals/functions/on_back_button_pressed.dart';
 import 'package:wethepeople/services/api/notification_api.dart';
 
 class NotificationPage extends StatefulWidget {
-  const NotificationPage({Key? key}) : super(key: key);
+  const NotificationPage({Key key}) : super(key: key);
 
   @override
   _NotificationPageState createState() => _NotificationPageState();
 }
 
 class _NotificationPageState extends State<NotificationPage> {
-  Future<NotificationListResponse>? notificationList;
+  Future<NotificationListResponse> notificationList;
   @override
   void initState() {
     super.initState();
@@ -65,9 +65,9 @@ class _NotificationPageState extends State<NotificationPage> {
                 builder: (context,
                     AsyncSnapshot<NotificationListResponse> snapshot) {
                   if (snapshot.hasData) {
-                    List notification = snapshot.data!.data;
+                    List notification = snapshot.data.data;
                     return ListView.builder(
-                      itemCount: snapshot.data!.data.length,
+                      itemCount: snapshot.data.data.length,
                       itemBuilder: (context, index) {
                         return Padding(
                           padding:
@@ -137,11 +137,11 @@ class NotificationDetail extends StatelessWidget {
   final String image;
 
   const NotificationDetail(
-      {Key? key,
-      required this.title,
-      required this.subtitle,
-      required this.description,
-      required this.image})
+      {Key key,
+      @required this.title,
+      @required this.subtitle,
+      @required this.description,
+      @required this.image})
       : super(key: key);
 
   @override

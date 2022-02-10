@@ -4,7 +4,7 @@ import 'package:wethepeople/services/api/firebase_token.dart';
 import 'package:wethepeople/views/tab_view.dart';
 
 class Splash extends StatefulWidget {
-  const Splash({Key? key}) : super(key: key);
+  const Splash({Key key}) : super(key: key);
 
   @override
   _SplashState createState() => _SplashState();
@@ -16,7 +16,7 @@ class _SplashState extends State<Splash> {
     super.initState();
     final FirebaseMessaging _firebaseMessaging = FirebaseMessaging.instance;
     _firebaseMessaging.getToken().then((token) {
-      createFCMTokenState(token!);
+      createFCMTokenState(token);
       debugPrint('token: $token');
     });
     // firebase(context);

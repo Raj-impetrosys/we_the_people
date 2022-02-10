@@ -26,7 +26,7 @@ Future<FCMTokenResponse> createFCMTokenState(String token) async {
 }
 
 class FCMTokenResponse with ChangeNotifier {
-  String? message;
+  String message;
 
   FCMTokenResponse([message]);
 
