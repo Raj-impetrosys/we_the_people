@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:wethepeople/globals/app_constants.dart';
+import 'package:whatsapp_unilink/whatsapp_unilink.dart';
 
 class Contact extends StatefulWidget {
   const Contact({Key key}) : super(key: key);
@@ -56,7 +57,7 @@ Widget newBody(context) {
           SizedBox(
               width: width * 0.5,
               child: Text(
-                'Antigua',
+                'Liberta, St. Pauls. Antigua',
                 style: TextStyle(
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -93,7 +94,7 @@ Widget newBody(context) {
                       // ));
                     },
                     child: Text(
-                      'info@wtpantigua.com',
+                      'wtpfm93.5@gmail.com',
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -105,10 +106,10 @@ Widget newBody(context) {
                   ),
                   GestureDetector(
                     onTap: () async {
-                      await launch('tel:+1 (347)-756-8776');
+                      await launch('tel:+1 (268)-560-9876');
                     },
                     child: Text(
-                      '+1 347-756-8776',
+                      '+1 -268-560-9876',
                       style: TextStyle(
                           fontSize: 16,
                           fontWeight: FontWeight.w600,
@@ -117,49 +118,52 @@ Widget newBody(context) {
                   ),
                 ],
               ),
-              Row(
-                children: [
-                  // GestureDetector(
-                  //   onTap: () {
-                  //     launch('https://www.facebook.com/oarichards');
-                  //   },
-                  //   child: SizedBox(
-                  //     height: height * 0.05,
-                  //     child: Image.asset(
-                  //       'assets/images/facebook.png',
-                  //       fit: BoxFit.fill,
-                  //     ),
-                  //   ),
-                  // ),
-                  // SizedBox(
-                  //   width: width * 0.02,
-                  // ),
-                  // GestureDetector(
-                  //   onTap: () {
-                  //     launch('https://www.instagram.com/djrichtime/');
-                  //   },
-                  //   child: SizedBox(
-                  //       height: height * 0.05,
-                  //       child: Image.asset(
-                  //         'assets/images/insta.png',
-                  //         fit: BoxFit.fill,
-                  //       )),
-                  // ),
-                  // SizedBox(
-                  //   width: width * 0.02,
-                  // ),
-                  GestureDetector(
-                    onTap: () {
-                      launch('https://wtpantigua.com');
-                    },
-                    child: SizedBox(
-                        height: height * 0.05,
-                        child: Image.asset(
-                          'assets/images/website.png',
-                          fit: BoxFit.fill,
-                        )),
+
+            ],
+          ),
+          SizedBox(height: 20,),
+          Row(
+            children: [
+              GestureDetector(
+                onTap: () {
+                  launch('https://www.facebook.com/WTPFM93.5');
+                },
+                child: SizedBox(
+                  height: height * 0.05,
+                  child: Image.asset(
+                    'assets/images/facebook.png',
+                    fit: BoxFit.fill,
                   ),
-                ],
+                ),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              GestureDetector(
+                onTap: () {
+                  // launch('https://www.instagram.com/djrichtime/');
+                  openWhatsApp();
+                },
+                child: SizedBox(
+                    height: height * 0.07,
+                    child: Image.asset(
+                      'assets/images/WhatsApp.png',
+                      fit: BoxFit.fill,
+                    )),
+              ),
+              SizedBox(
+                width: 10,
+              ),
+              GestureDetector(
+                onTap: () {
+                  launch('https://wtpantigua.com');
+                },
+                child: SizedBox(
+                    height: height * 0.05,
+                    child: Image.asset(
+                      'assets/images/website.png',
+                      fit: BoxFit.fill,
+                    )),
               ),
             ],
           ),
@@ -167,4 +171,15 @@ Widget newBody(context) {
       ),
     ),
   );
+}
+
+void openWhatsApp() async {
+  final link = WhatsAppUnilink(
+    phoneNumber: '+1-(268)780243',
+    text: "Hello We The People!",
+  );
+  // Convert the WhatsAppUnilink instance to a string.
+  // Use either Dart's string interpolation or the toString() method.
+  // The "launch" method is part of "url_launcher".
+  await launch('$link');
 }

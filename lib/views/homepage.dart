@@ -196,7 +196,7 @@ class _HomePageState extends State<HomePage>
             children: [
               Column(
                 children: [
-                  const Text("Now Playing"),
+                  const Text("Now Playing WTP  93.5 FM"),
                   const SizedBox(
                     height: 5,
                   ),
@@ -285,7 +285,7 @@ class _HomePageState extends State<HomePage>
           shape:
               RoundedRectangleBorder(borderRadius: BorderRadius.circular(500)),
           elevation: 5,
-          color: Colors.brown[400],
+          color: Colors.black,
           child: SizedBox(
             height: 50,
             // width: width * 0.9,
@@ -299,7 +299,7 @@ class _HomePageState extends State<HomePage>
                       setState(() {
                         (volume > 9) ? volume = volume - 10 : volume = 0;
                       });
-                      audioPlayerController.setVolume(volume: volume);
+                      audioPlayerController.setVolume(volume: volume/100);
                     },
                     child: Icon(
                       (volume == 0) ? Icons.volume_off : Icons.volume_down,
@@ -331,7 +331,7 @@ class _HomePageState extends State<HomePage>
                       setState(() {
                         (volume < 91) ? volume = volume + 10 : volume = 100;
                       });
-                      audioPlayerController.setVolume(volume: volume);
+                      audioPlayerController.setVolume(volume: volume/100);
                     },
                     child: const Icon(
                       Icons.volume_up,

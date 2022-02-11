@@ -1,7 +1,7 @@
 import 'package:audio_service/audio_service.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
-import 'package:google_fonts/google_fonts.dart';
+// import 'package:google_fonts/google_fonts.dart';
 import 'package:wethepeople/controllers/audio_player_controller.dart';
 import 'package:wethepeople/views/splash.dart';
 
@@ -31,7 +31,8 @@ class MyApp extends StatelessWidget {
       title: 'We The People',
       theme: ThemeData(
           primarySwatch: Colors.blue,
-          textTheme: GoogleFonts.aBeeZeeTextTheme()),
+          // textTheme: GoogleFonts.aBeeZeeTextTheme(),
+      ),
       home: const Splash(),
     );
   }

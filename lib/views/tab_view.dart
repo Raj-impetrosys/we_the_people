@@ -48,7 +48,7 @@ class _BottomTabBarState extends State<BottomTabBar>
 
   @override
   Widget build(BuildContext context) {
-    Color iconColor = Colors.black;
+    Color iconColor = Colors.white;
     return WillPopScope(
       onWillPop: () {
         return onBackButtonPressed(context);
@@ -60,7 +60,7 @@ class _BottomTabBarState extends State<BottomTabBar>
           onPressed: () => Navigator.of(context).pushNamed('/bar'),
         )),
         bottomNavigationBar: ConvexAppBar(
-          backgroundColor: Colors.brown,
+          backgroundColor: Constants.themeColorRed,
           color: iconColor,
           style: TabStyle.react,
           items: const [

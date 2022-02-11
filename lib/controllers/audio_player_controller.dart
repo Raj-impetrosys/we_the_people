@@ -48,6 +48,8 @@ class AudioPlayerController {
       liveAudioUrl = value.data['audio']['file'];
     }).whenComplete(() async {
       // result = await audioPlayer.play(iveAudioUrl!);
+      // Constants.isPlaying? audioPlayerController.play():audioPlayerController.stop();
+      Constants.isPlaying? play(): stop();
     });
     setNotification();
     // setAndroidNotification();

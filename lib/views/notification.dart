@@ -172,8 +172,8 @@ class NotificationDetail extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
                 Text(
-                  'Title: $title',
-                  style: const TextStyle(fontSize: 18),
+                  title,
+                  style: const TextStyle(fontSize: 20,fontWeight: FontWeight.bold),
                 ),
                 Align(
                     alignment: Alignment.topRight,
@@ -198,7 +198,7 @@ class NotificationDetail extends StatelessWidget {
             //   height: height * 0.01,
             // ),
             Text(
-              'Subtitle: $subtitle',
+              subtitle,
               style: const TextStyle(
                   color: Color(0xff929292),
                   fontWeight: FontWeight.w500,
@@ -207,20 +207,20 @@ class NotificationDetail extends StatelessWidget {
             SizedBox(
               height: height * 0.01,
             ),
-            Text(
-              'Description: $description',
-              style: const TextStyle(fontSize: 16),
-              // style: textStyle,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
             Hero(
                 tag: image,
                 child: Image.network(
                   image,
                   fit: BoxFit.fill,
                 )),
+            const SizedBox(
+              height: 10,
+            ),
+            Text(
+              description,
+              style: const TextStyle(fontSize: 16,color: Colors.black),
+              // style: textStyle,
+            ),
           ],
         ),
       ),
